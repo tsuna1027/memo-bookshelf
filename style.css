@@ -1,0 +1,271 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-image: url("4909475_l.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* 操作エリア */
+.control-area,
+.delete-area {
+  text-align: center;
+  margin: 12px 0;
+}
+
+button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* 本棚 */
+.bookshelf {
+  padding: 40px;
+}
+
+.shelf {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+/* 本 */
+.book {
+  width: 220px;
+  background: #fff8ec;
+  border-radius: 6px;
+  padding: 12px;
+
+  box-shadow:
+    inset 0 -6px 0 rgba(0,0,0,0.25),
+    0 6px 16px rgba(0,0,0,0.35);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: static;
+  cursor: grab;
+
+}
+
+/* 表紙 */
+.book img {
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  background: #eee;
+  border-radius: 4px;
+  cursor: zoom-in;
+}
+
+/* メモ */
+.book textarea {
+  height: 70px;
+  resize: none;
+  font-weight: bold;
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+/* ドラッグ中の本だけ見た目を変える */
+.book.dragging {
+  opacity: 0.6;
+  cursor: grabbing;
+  z-index: 1000;
+}
+
+
+/* 選択削除 */
+.book.selected {
+  opacity: 0.5;
+  outline: 3px dashed red;
+}
+
+#selectedCount {
+  margin-left: 12px;
+  font-weight: bold;
+  color: #b00000;
+}
+
+/* モーダル */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+}
+
+.modal-content textarea {
+  height: 100px;
+  font-weight: bold;
+}
+
+/* ===== ページ一覧（home） ===== */
+
+.home-bg {
+  min-height: 100vh;
+  background: #f5f0e6;
+}
+
+.home-title {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.page-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.page-card {
+  display: block;
+  background: #fff8ec;
+  padding: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #000;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  cursor: grab;
+}
+
+
+
+/* ドラッグ中のカードだけ */
+.page-card.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+  z-index: 1000;
+}
+
+
+.page-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.page-card h2 {
+  margin-top: 0;
+}
+
+.page-card p {
+  font-weight: bold;
+}
+
+/* 新規メモ帳カード */
+.new-card {
+  background: #e8f4ff;
+  border: 2px dashed #3a7bd5;
+  text-align: center;
+}
+
+.new-card h2 {
+  font-size: 1.3em;
+}
+
+.new-card:hover {
+  background: #d7ebff;
+}
+
+.page-card {
+  position: relative;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 6px;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+
+.rename-btn {
+  background: #4dabf7;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.rename-btn:hover {
+  background: #339af0;
+}
+
+.delete-btn {
+  background: #ff6b6b;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background: #ff3b3b;
+}
+
+.file-menu {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 100;
+}
+
+.file-menu button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 選択削除モード中 */
+#selectDeleteBtn.active {
+  background: #ff4d4d;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>メモ本棚</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="home.html">🏠 一覧へ戻る</a>
+
+  <div class="control-area">
+    <!-- ★ ファイル選択ボタン -->
+    <button id="selectFileBtn">ファイルを選択</button>
+
+    <!-- ★ 選択メニュー -->
+    <div id="fileTypeMenu" class="file-menu hidden">
+      <button data-type="memo">メモのみ</button>
+      <button data-type="photo">メモ＋写真</button>
+    </div>
+
+    <!-- ★ 写真用 input（非表示） -->
+    <input
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      hidden
+    >
+
+    <button id="saveBtn">保存</button>
+  </div>
+
+  <div class="delete-area">
+    <button id="deleteAllBtn">すべて削除</button>
+    <button id="selectDeleteBtn">選択して削除</button>
+    <span id="selectedCount"></span>
+  </div>
+
+  <div class="bookshelf">
+    <div class="shelf" id="shelf"></div>
+  </div>
+
+  <!-- 拡大モーダル -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <img id="modalImage">
+      <textarea id="modalMemo"></textarea>
+      <button id="closeModal">閉じる</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
