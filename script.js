@@ -269,13 +269,22 @@ function onMouseMove(e) {
 
   if (!isDragging) return;
 
-  const after = getAfterByMouse(shelf, e.clientX, e.clientY);
+  const target = getSwapTarget(
+  shelf,
+  e.clientX,
+  e.clientY
+);
 
-  if (!after) {
-    shelf.appendChild(draggingBook);
-  } else {
-    shelf.insertBefore(draggingBook, after);
-  }
+if (
+  target &&
+  target !== draggingBook
+) {
+  const draggingNext = draggingBook.nextSibling;
+  const targetNext = target.nextSibling;
+
+  shelf.insertBefore(draggingBook, targetNext);
+  shelf.insertBefore(target, draggingNext);
+}
 }
 
 
@@ -302,7 +311,7 @@ function onMouseUp() {
 
 
 
-function getAfterByMouse(container, x, y) {
+function getSwapTarget(container, x, y) {
   const items = [...container.querySelectorAll(".book:not(.dragging)")];
 
   let closest = null;
@@ -311,11 +320,13 @@ function getAfterByMouse(container, x, y) {
   items.forEach(item => {
     const box = item.getBoundingClientRect();
 
-    // マウスが同じ行にあるか
-    const isSameRow = y >= box.top && y <= box.bottom;
-    if (!isSameRow) return;
+    const centerX = box.left + box.width / 2;
+    const centerY = box.top + box.height / 2;
 
-    const distance = Math.abs(x - (box.left + box.width / 2));
+    const distance = Math.hypot(
+      x - centerX,
+      y - centerY
+    );
 
     if (distance < closestDistance) {
       closestDistance = distance;
@@ -325,5 +336,6 @@ function getAfterByMouse(container, x, y) {
 
   return closest;
 }
+
 
 
